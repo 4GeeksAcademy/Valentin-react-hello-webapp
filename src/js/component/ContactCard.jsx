@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 
 const ContactCard = ({ contact }) => {
+  const { actions } = useContext(Context);
+  const handleDelete = () => {
+    actions.handleDelete(contact.id);
+  };
   return (
-    <div>
+    <div key={contact.id}>
       <div className="card d-flex mx-auto w-75">
         <div className="d-flex">
           <div className="photo ms-4 align-items-center d-flex">
@@ -19,9 +24,13 @@ const ContactCard = ({ contact }) => {
             <span>Téléphone: {contact.phone}</span> <br />
             <span>Email: {contact.email}</span>
           </div>
-          <div className="icons">
-            <button>&#9998;</button>
-            <button data-bs-toggle="modal" data-bs-target="#myModal">
+          <div className="icons mt-2 me-2">
+            <button className="me-2  btn-primary">&#9998;</button>
+            <button
+              className=" btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+            >
               &#9746;
             </button>
             <div
@@ -56,7 +65,11 @@ const ContactCard = ({ contact }) => {
                     >
                       Oh my god!!
                     </button>
-                    <button type="button" className="btn btn-primary">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={handleDelete}
+                    >
                       Sure baby!
                     </button>
                   </div>

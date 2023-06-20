@@ -8,13 +8,14 @@ const ContactList = () => {
 
   useEffect(() => {
     actions.loadSomeData();
-  }, []);
+  }, [store]);
 
   return (
     <div className="content mt-5 mx-auto">
-      {store.contacts.map((contact) => (
-        <ContactCard contact={contact} key={contact.id} />
-      ))}
+      {store.contacts &&
+        store.contacts.map((contact) => (
+          <ContactCard contact={contact} key={contact.id} />
+        ))}
       <div className="mt-4 d-flex justify-content-center">
         <Link to="/ContactForm">
           <button className="btn btn-success">Add New Contact</button>
