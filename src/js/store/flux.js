@@ -2,11 +2,21 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       contacts: [],
+      contact: {
+        full_name: "",
+        email: "",
+        phone: "",
+        address: "",
+      },
     },
     actions: {
-      // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+      handleChange: (e) => {
+        e.preventDefault();
+        const { name, value } = e.target;
+        setStore({ ...getStore().contact, [name]: value });
       },
       loadSomeData: () => {
         fetch(
@@ -20,7 +30,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log("Error loading contacts:", error);
           });
       },
-
       deleteContact: (id) => {
         fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
           method: "DELETE",
@@ -29,8 +38,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             if (!response.ok) {
               throw new Error("Erreur lors de la suppression du contact.");
             }
-
-            // Mettez à jour le store après la suppression réussie
             const { contacts } = getStore();
             const updatedContacts = contacts.filter(
               (contact) => contact.id !== id
@@ -41,7 +48,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Erreur lors de la suppression du contact:", error);
           });
       },
-
       createContact: (newContact) => {
         fetch("https://assets.breatheco.de/apis/fake/contact/", {
           method: "POST",
@@ -54,37 +60,26 @@ const getState = ({ getStore, getActions, setStore }) => {
             if (!response.ok) {
               throw new Error("Erreur lors de la création du contact.");
             }
-
             const { contacts } = getStore();
-            const updatedContacts = [...contacts, newContact];
-            setStore({ contacts: updatedContacts });
+            const { contact } = getStore();
+            setStore([...contacts, { ...contact }]);
+            setStore({
+              full_name: "",
+              email: "",
+              phone: "",
+              address: "",
+            });
           })
           .catch((error) => {
             console.error("Erreur lors de la création du contact:", error);
           });
       },
-
-      handleSubmit: (newContact) => {
-        const { createContact } = getActions();
-        createContact(newContact);
-      },
-
-      handleDelete: (id) => {
-        const { deleteContact } = getActions();
-        deleteContact(id);
-      },
       changeColor: (index, color) => {
-        //get the store
         const store = getStore();
-
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
         const demo = store.demo.map((elm, i) => {
           if (i === index) elm.background = color;
           return elm;
         });
-
-        //reset the global store
         setStore({ demo: demo });
       },
     },

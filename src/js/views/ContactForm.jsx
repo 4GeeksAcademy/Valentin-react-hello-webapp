@@ -3,35 +3,12 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const ContactForm = () => {
-  const { actions } = useContext(Context);
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [agenda, setAgenda] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const newContact = {
-      full_name: fullName,
-      email,
-      phone: phoneNumber,
-      address,
-    };
-
-    actions.handleSubmit(newContact);
-
-    setFullName("");
-    setEmail("");
-    setPhoneNumber("");
-    setAddress("");
-  };
+  const { actions, store } = useContext(Context);
 
   return (
     <div>
       <div className="container w-75 mt-5 border border-dark">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={() => actions.createContact()}>
           <div className="mb-3">
             <label htmlFor="fullName" className="form-label">
               Full Name
@@ -41,8 +18,8 @@ const ContactForm = () => {
               className="form-control"
               id="fullName"
               aria-describedby="fullName"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              value={store.contacts.full_name}
+              onChange={(e) => actions.handleChange(e)}
             />
           </div>
           <div className="mb-3">
@@ -53,8 +30,8 @@ const ContactForm = () => {
               type="email"
               className="form-control"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={store.contacts.email}
+              onChange={(e) => actions.handleChange(e)}
             />
           </div>
           <div className="mb-3">
@@ -65,32 +42,20 @@ const ContactForm = () => {
               type="text"
               className="form-control"
               id="phoneNumber"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={store.contacts.phone}
+              onChange={(e) => actions.handleChange(e)}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="adress" className="form-label">
+            <label htmlFor="address" className="form-label">
               Address
             </label>
             <input
               type="text"
               className="form-control"
               id="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="adress" className="form-label">
-              Agenda
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="address"
-              value={agenda}
-              onChange={(e) => setAgenda(e.target.value)}
+              value={store.contacts.address}
+              onChange={(e) => actions.handleChange(e)}
             />
           </div>
           <div className="justify-content-center d-flex my-3 w-100">

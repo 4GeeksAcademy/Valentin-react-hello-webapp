@@ -3,13 +3,11 @@ import { Context } from "../store/appContext";
 
 const ContactCard = ({ contact }) => {
   const { actions } = useContext(Context);
-  const handleDelete = () => {
-    actions.handleDelete(contact.id);
-  };
+
   return (
     <div key={contact.id}>
       <div className="card d-flex mx-auto w-75">
-        <div className="d-flex">
+        <div className="d-flex" key={contact.id}>
           <div className="photo ms-4 align-items-center d-flex">
             <img
               src="https://i.pinimg.com/originals/00/81/bd/0081bdd28bc4730a28cceb697b213de9.png"
@@ -62,13 +60,14 @@ const ContactCard = ({ contact }) => {
                       type="button"
                       className="btn btn-secondary"
                       data-bs-dismiss="modal"
+                      
                     >
                       Oh my god!!
                     </button>
                     <button
                       type="button"
                       className="btn btn-primary"
-                      onClick={handleDelete}
+                      onClick={() => actions.deleteContact(contact.id)}
                     >
                       Sure baby!
                     </button>

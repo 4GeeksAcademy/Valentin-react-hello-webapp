@@ -8,7 +8,7 @@ const ContactList = () => {
 
   useEffect(() => {
     actions.loadSomeData();
-  }, [store]);
+  }, [store.contacts]);
 
   return (
     <div className="content mt-5 mx-auto">
