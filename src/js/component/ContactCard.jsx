@@ -60,14 +60,14 @@ const ContactCard = ({ contact }) => {
                       type="button"
                       className="btn btn-secondary"
                       data-bs-dismiss="modal"
-                      
                     >
                       Oh my god!!
                     </button>
                     <button
                       type="button"
                       className="btn btn-primary"
-                      onClick={() => actions.deleteContact(contact.id)}
+                      onClick={() => actions.handleDelete(contact.id)}
+                      data-bs-dismiss="modal"
                     >
                       Sure baby!
                     </button>

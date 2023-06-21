@@ -10,13 +10,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
     },
     actions: {
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
       handleChange: (e) => {
         e.preventDefault();
         const { name, value } = e.target;
-        setStore({ ...getStore().contact, [name]: value });
+        setStore({ ...contact, [name]: value });
       },
       loadSomeData: () => {
         fetch(
@@ -38,15 +35,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             if (!response.ok) {
               throw new Error("Erreur lors de la suppression du contact.");
             }
-            const { contacts } = getStore();
-            const updatedContacts = contacts.filter(
-              (contact) => contact.id !== id
-            );
-            setStore({ contacts: updatedContacts });
           })
           .catch((error) => {
             console.error("Erreur lors de la suppression du contact:", error);
           });
+      },
+      handleDelete: (id) => {
+        const { contacts } = getStore();
+        const updatedContacts = contacts.filter((contact) => contact.id !== id);
+        setStore({ contacts: updatedContacts });
+        getActions().deleteContact(id);
       },
       createContact: (newContact) => {
         fetch("https://assets.breatheco.de/apis/fake/contact/", {
