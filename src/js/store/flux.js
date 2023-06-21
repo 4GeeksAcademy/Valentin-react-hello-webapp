@@ -13,8 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       handleChange: (e) => {
         e.preventDefault();
         const { name, value } = e.target;
-        setStore({ ...contact, [name]: value });
+        setStore({ ...getStore().contact, [name]: value });
       },
+
       loadSomeData: () => {
         fetch(
           "https://assets.breatheco.de/apis/fake/contact/agenda/DreamAgenda"
@@ -46,32 +47,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ contacts: updatedContacts });
         getActions().deleteContact(id);
       },
-      createContact: (newContact) => {
+      createContact: (e) => {
+        e.preventDefault();
+        const { contacts, contact } = getStore();
+        console.log(contact);
         fetch("https://assets.breatheco.de/apis/fake/contact/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(newContact),
+          body: JSON.stringify(contact),
         })
           .then((response) => {
             if (!response.ok) {
               throw new Error("Erreur lors de la création du contact.");
             }
-            const { contacts } = getStore();
-            const { contact } = getStore();
-            setStore([...contacts, { ...contact }]);
-            setStore({
-              full_name: "",
-              email: "",
-              phone: "",
-              address: "",
-            });
           })
           .catch((error) => {
             console.error("Erreur lors de la création du contact:", error);
           });
       },
+
       changeColor: (index, color) => {
         const store = getStore();
         const demo = store.demo.map((elm, i) => {
