@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
-const ContactCard = ({ contact }) => {
+const ContactCard = ({ contact, index }) => {
   const { actions } = useContext(Context);
 
   return (
@@ -66,7 +66,7 @@ const ContactCard = ({ contact }) => {
                     <button
                       type="button"
                       className="btn btn-primary"
-                      onClick={() => actions.handleDelete(contact.id)}
+                      onClick={() => actions.handleDelete(contact.id, index)}
                       data-bs-dismiss="modal"
                     >
                       Sure baby!

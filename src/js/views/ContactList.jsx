@@ -13,8 +13,8 @@ const ContactList = () => {
   return (
     <div className="content mt-5 mx-auto">
       {store.contacts &&
-        store.contacts.map((contact) => (
-          <ContactCard contact={contact} key={contact.id} />
+        store.contacts.map((contact, index) => (
+          <ContactCard contact={contact} key={contact.id} index={index} />
         ))}
       <div className="mt-4 d-flex justify-content-center">
         <Link to="/ContactForm">

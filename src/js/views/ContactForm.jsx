@@ -4,11 +4,15 @@ import { Context } from "../store/appContext";
 
 const ContactForm = () => {
   const { actions, store } = useContext(Context);
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <div>
       <div className="container w-75 mt-5 border border-dark">
-        <form onSubmit={() => actions.createContact()}>
+        <form>
           <div className="mb-3">
             <label htmlFor="fullName" className="form-label">
               Full Name
@@ -18,8 +22,8 @@ const ContactForm = () => {
               className="form-control"
               id="fullName"
               aria-describedby="fullName"
-              value={store.contacts.full_name}
-              onChange={(e) => actions.handleChange(e)}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -30,8 +34,8 @@ const ContactForm = () => {
               type="email"
               className="form-control"
               id="email"
-              value={store.contacts.email}
-              onChange={(e) => actions.handleChange(e)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -42,8 +46,8 @@ const ContactForm = () => {
               type="text"
               className="form-control"
               id="phoneNumber"
-              value={store.contacts.phone}
-              onChange={(e) => actions.handleChange(e)}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -54,12 +58,23 @@ const ContactForm = () => {
               type="text"
               className="form-control"
               id="address"
-              value={store.contacts.address}
-              onChange={(e) => actions.handleChange(e)}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
           <div className="justify-content-center d-flex my-3 w-100">
-            <button type="submit" className=" w-100 btn btn-primary">
+            <button
+              type="button"
+              onClick={() =>
+                actions.createContact({
+                  full_name: fullName,
+                  email: email,
+                  phone: phone,
+                  address: address,
+                })
+              }
+              className=" w-100 btn btn-primary"
+            >
               Add contact
             </button>
           </div>

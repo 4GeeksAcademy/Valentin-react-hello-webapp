@@ -7,13 +7,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         email: "",
         phone: "",
         address: "",
+        agenda_slug: "DreamAgenda",
       },
     },
     actions: {
       handleChange: (e) => {
         e.preventDefault();
         const { name, value } = e.target;
-        setStore({ ...getStore().contact, [name]: value });
+        const { contact } = getStore();
+        setStore({ contact: { ...contact, [name]: value } });
       },
 
       loadSomeData: () => {
@@ -41,27 +43,36 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Erreur lors de la suppression du contact:", error);
           });
       },
-      handleDelete: (id) => {
+      handleDelete: (id, index) => {
         const { contacts } = getStore();
-        const updatedContacts = contacts.filter((contact) => contact.id !== id);
+        const updatedContacts = contacts.splice(index, 1);
+        console.log(contacts.splice(index, 1));
         setStore({ contacts: updatedContacts });
-        getActions().deleteContact(id);
+        // getActions().deleteContact(id);
       },
-      createContact: (e) => {
-        e.preventDefault();
-        const { contacts, contact } = getStore();
-        console.log(contact);
+      createContact: (obj) => {
+        const store = getStore();
+        obj.agenda_slug = "DreamAgenda";
+        console.log(obj);
+
         fetch("https://assets.breatheco.de/apis/fake/contact/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(contact),
+          body: JSON.stringify(obj),
         })
           .then((response) => {
             if (!response.ok) {
               throw new Error("Erreur lors de la création du contact.");
             }
+            return response.json();
+          })
+          .then((data) => {
+            setStore({
+              contacts: [...contacts, data],
+              contact: obj,
+            });
           })
           .catch((error) => {
             console.error("Erreur lors de la création du contact:", error);
