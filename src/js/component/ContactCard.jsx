@@ -1,81 +1,54 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Context } from "../store/appContext";
+import { useContext } from "react";
 
-const ContactCard = ({ contact, index }) => {
+const ContactCard = ({ contact, onEdit }) => {
   const { actions } = useContext(Context);
 
+  const { full_name, email, phone, address, id } = contact;
+
+  const handlerOnEdit = (id) => {
+    onEdit();
+    actions.updateId(id);
+  };
+
   return (
-    <div key={contact.id}>
-      <div className="card d-flex mx-auto w-75">
-        <div className="d-flex" key={contact.id}>
-          <div className="photo ms-4 align-items-center d-flex">
-            <img
-              src="https://i.pinimg.com/originals/00/81/bd/0081bdd28bc4730a28cceb697b213de9.png"
-              className="img-fluid rounded-start"
-              width={75}
-              alt="personaje"
-            />
-          </div>
+    <div className="card col-md-12 mb-12">
+      <div className="row mb-2 g-0">
+        <div className="col-md-4 img-contact d-flex align-items-center ps-2">
+          <img
+            src="https://i.pinimg.com/736x/c7/4c/a6/c74ca6827eed655aa080143a0970242f.jpg"
+            alt="Contact"
+            className="img-fluid"
+          />
+        </div>
+        <div className="col-md-6 text-start">
           <div className="card-body">
-            <h5 className="card-title">{contact.full_name}</h5>
-            <span>Adresse: {contact.address}</span> <br />
-            <span>Téléphone: {contact.phone}</span> <br />
-            <span>Email: {contact.email}</span>
+            <h5 className="card-title">{full_name}</h5>
+            <p className="card-text">
+              <strong>Email:</strong> {email}
+            </p>
+            <p className="card-text">
+              <strong>Phone:</strong> {phone}
+            </p>
+            <p className="card-text">
+              <strong>Address:</strong> {address}
+            </p>
           </div>
-          <div className="icons mt-2 me-2">
-            <button className="me-2  btn-primary">&#9998;</button>
-            <button
-              className=" btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#myModal"
-            >
-              &#9746;
-            </button>
-            <div
-              className="modal"
-              id="myModal"
-              aria-labelledby="myModal"
-              aria-hidden="true"
-              tabIndex="-1"
-            >
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title">Are you sure?</h5>
-                    <button
-                      type="button"
-                      className="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div className="modal-body">
-                    <p>
-                      if you click on this button, this contact will be
-                      pulverized instantly
-                    </p>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Oh my god!!
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={() => actions.handleDelete(contact.id, index)}
-                      data-bs-dismiss="modal"
-                    >
-                      Sure baby!
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div className="col-md-2 card-footer d-flex justify-content-center align-items-center">
+          <button
+            className="btn btn-primary me-2"
+            onClick={() => handlerOnEdit(id)}
+          >
+            &#9998;
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={() => actions.deleteContact(id)}
+          >
+            &#9746;
+          </button>
         </div>
       </div>
     </div>

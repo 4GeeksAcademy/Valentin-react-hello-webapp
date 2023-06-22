@@ -1,3 +1,15 @@
 /* 
     General Styles
 */
+
+body {
+  background-color: #444;
+}
+
+img {
+  width: 120px;
+}
+
+.card {
+  margin-bottom: 10px;
+}
