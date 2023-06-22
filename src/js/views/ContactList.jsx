@@ -23,16 +23,19 @@ const ContactList = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className=''>Contact List</h1>
+      <h1 className="">Contact List</h1>
       <h5>List's name</h5>
       <input
         type="text"
         onChange={(e) => actions.changeAgenda(e.target.value)}
       />
-      <h6>If the calendar name does not exist, it will create a new one.</h6>
+      <h6>
+        To create a directory, add a contact and it will create it
+        automatically.
+      </h6>
       <button
         type="button"
-        className="btn btn-success mb-3 d-flex"
+        className="btn btn-success mb-3 "
         onClick={openModal}
       >
         Add New Contact

@@ -29,7 +29,7 @@ const ContactForm = ({ isOpen, onClose }) => {
     if(!store.idToUpdate){
       actions.createContact(newContact)
     }else{
-      actions.onEditContact(newContact)
+      actions.updateContact(newContact)
     };
     setFull_Name('');
     setEmail('');
@@ -61,7 +61,7 @@ const ContactForm = ({ isOpen, onClose }) => {
           <div className="modal-body">
             <div className="mb-3">
               <label htmlFor="full_name" className="form-label">
-                Full Name
+                Full Name:
               </label>
               <input
                 type="text"
@@ -73,7 +73,7 @@ const ContactForm = ({ isOpen, onClose }) => {
             </div>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
-                Email
+                Email:
               </label>
               <input
                 type="email"
@@ -85,7 +85,7 @@ const ContactForm = ({ isOpen, onClose }) => {
             </div>
             <div className="mb-3">
               <label htmlFor="phone" className="form-label">
-                Phone
+                Phone:
               </label>
               <input
                 type="text"
@@ -97,7 +97,7 @@ const ContactForm = ({ isOpen, onClose }) => {
             </div>
             <div className="mb-3">
               <label htmlFor="address" className="form-label">
-                Address
+                Address:
               </label>
               <input
                 type="text"

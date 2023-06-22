@@ -7,7 +7,7 @@ const ContactCard = ({ contact, onEdit }) => {
 
   const { full_name, email, phone, address, id } = contact;
 
-  const handlerOnEdit = (id) => {
+  const handleEdit = (id) => {
     onEdit();
     actions.updateId(id);
   };
@@ -17,7 +17,7 @@ const ContactCard = ({ contact, onEdit }) => {
       <div className="row mb-2 g-0">
         <div className="col-md-4 img-contact d-flex align-items-center ps-2">
           <img
-            src="https://i.pinimg.com/736x/c7/4c/a6/c74ca6827eed655aa080143a0970242f.jpg"
+            src="https://i.pinimg.com/originals/d4/e4/42/d4e4423660d89e6947103541d119d72d.png"
             alt="Contact"
             className="img-fluid"
           />
@@ -39,7 +39,7 @@ const ContactCard = ({ contact, onEdit }) => {
         <div className="col-md-2 card-footer d-flex justify-content-center align-items-center">
           <button
             className="btn btn-primary me-2"
-            onClick={() => handlerOnEdit(id)}
+            onClick={() => handleEdit(id)}
           >
             &#9998;
           </button>
