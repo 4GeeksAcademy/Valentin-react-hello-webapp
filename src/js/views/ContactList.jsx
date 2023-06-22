@@ -23,13 +23,13 @@ const ContactList = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="">Contact List</h1>
+      <h1 className="main-title">Contact List</h1>
       <h5>List name</h5>
       <input
         type="text"
         onChange={(e) => actions.changeAgenda(e.target.value)}
       />
-      <h6>
+      <h6 className="mt-2">
         To create a directory, add a contact and it will create it
         automatically.
       </h6>

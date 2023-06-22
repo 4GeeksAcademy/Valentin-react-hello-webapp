@@ -36,7 +36,7 @@ const ContactCard = ({ contact, onEdit }) => {
             </p>
           </div>
         </div>
-        <div className="col-md-2 card-footer d-flex justify-content-center align-items-center">
+        <div className="col-md-2 card-footer bg-transparent d-flex justify-content-center align-items-center">
           <button
             className="btn btn-primary me-2"
             onClick={() => handleEdit(id)}
