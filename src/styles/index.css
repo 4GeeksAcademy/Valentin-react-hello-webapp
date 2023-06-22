@@ -3,10 +3,10 @@
 */
 
 body {
-  background-image: url(https://c1.wallpaperflare.com/preview/61/421/308/book-agenda-table-notes.jpg);
+  background-image: url(https://wallpaperaccess.com/full/5673918.jpg);
   background-position: center;
   background-size: cover;
-  color: rgb(255, 255, 255);
+  color: rgb(42, 38, 38);
 }
 
 .container {
@@ -42,5 +42,5 @@ a {
 
 a:hover {
   text-decoration: underline;
-  color: #00ff1a;
+  color: #485f4a;
 }

@@ -24,7 +24,7 @@ const ContactList = () => {
   return (
     <div className="container mx-auto">
       <h1 className="">Contact List</h1>
-      <h5>List's name</h5>
+      <h5>List name</h5>
       <input
         type="text"
         onChange={(e) => actions.changeAgenda(e.target.value)}
